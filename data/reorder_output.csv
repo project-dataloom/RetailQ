@@ -1,0 +1,5 @@
+Product ID,Status,Reason,Reorder Qty,Lead Time (days)
+101,REORDER,Predicted demand exceeds stock or below reorder point,50,5
+102,REORDER,Predicted demand exceeds stock or below reorder point,50,4
+103,STOCK_OK,Sufficient stock available,0,7
+104,REORDER,Predicted demand exceeds stock or below reorder point,50,6

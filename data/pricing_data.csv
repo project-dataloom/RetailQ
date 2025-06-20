@@ -1,0 +1,6 @@
+Product ID,Store ID,Date,Price,Units Sold,Stock Remaining,Cost Price,Promotion,Competitor Price,Season
+101,1,2025-05-25,99.99,130,70,75.00,1,95.00,Summer
+101,1,2025-05-26,94.99,145,50,75.00,0,93.00,Summer
+102,1,2025-05-25,49.99,50,30,40.00,1,47.00,Monsoon
+103,2,2025-05-25,129.99,230,20,100.00,0,125.00,Summer
+104,2,2025-05-26,89.99,90,60,70.00,1,88.00,Summer

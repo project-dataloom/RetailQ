@@ -1,0 +1,6 @@
+Product ID,Store ID,Date,Units Sold,Price,Promotion,Holiday,Weather,Stock Available
+101,1,2025-05-25,130,99.99,1,0,Clear,200
+101,1,2025-05-26,120,99.99,0,0,Cloudy,170
+102,1,2025-05-25,50,49.99,1,1,Rainy,80
+103,2,2025-05-25,230,129.99,0,0,Clear,250
+104,2,2025-05-26,90,89.99,1,0,Clear,100

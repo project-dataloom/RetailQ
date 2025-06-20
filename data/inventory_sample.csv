@@ -1,0 +1,5 @@
+Product ID,Store ID,Current Stock,Reorder Point,Supplier Lead Time (days)
+101,1,100,120,5
+102,1,40,50,4
+103,2,200,180,7
+104,2,60,75,6
