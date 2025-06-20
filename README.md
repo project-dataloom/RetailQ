@@ -49,30 +49,30 @@ It’s built around a *multi-agent architecture* where each agent focuses on a s
 ## 📁 Folder Structure
 
 RetailQ/
-├── dashboard.py              # Streamlit dashboard UI (Frontend)
-├── main.py                   # Main entry to trigger all agents
-├── multi_agent_loop.py       # Full multi-agent loop integration
-├── ollama_client.py          # Handles LLM reasoning via Ollama/Mistral
-├── requirements.txt          # Python dependencies
+├── dashboard.py              $ Streamlit dashboard UI (Frontend)
+├── main.py                   $ Main entry to trigger all agents
+├── multi_agent_loop.py       $ Full multi-agent loop integration
+├── ollama_client.py          $ Handles LLM reasoning via Ollama/Mistral
+├── requirements.txt          $ Python dependencies
 
-├── data/                     # Raw CSV datasets
+├── data/                     $ Raw CSV datasets
 │   ├── demand_data.csv
 │   ├── inventory_sample.csv
 │   └── pricing_data.csv
 
-├── models/                   # Trained model .pkl files
+├── models/                   $ Trained model .pkl files
 │   ├── demand_model.pkl
 │   └── pricing_model.pkl
 
-├── demand_forecasting/       # Demand agent logic
+├── demand_forecasting/       $ Demand agent logic
 │   ├── train.py
 │   ├── predict.py
 │   └── preprocess.py
 
-├── inventory_agent/          # Inventory agent logic
+├── inventory_agent/          $ Inventory agent logic
 │   └── inventory_decision.py
 
-└── pricing_agent/            # Pricing agent logic
+└── pricing_agent/            $ Pricing agent logic
     └── predict.py
 
 ---
