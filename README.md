@@ -47,7 +47,7 @@ It’s built around a *multi-agent architecture* where each agent focuses on a s
 ---
 
 ## 📁 Folder Structure
-   roject Root
+Project Root
 
 dashboard.py – Streamlit dashboard UI
 
@@ -59,7 +59,7 @@ ollama_client.py – Handles LLM responses using Ollama
 
 requirements.txt – Lists project dependencies
 
-Data Folder (/data)
+**🗂️ /data
 
 demand_data.csv – Dataset for demand forecasting
 
@@ -67,11 +67,13 @@ inventory_sample.csv – Sample stock and inventory data
 
 pricing_data.csv – Dataset for pricing agent
 
-Models Folder (/models)
+**🧠 /models
 
 demand_model.pkl – Trained model for demand prediction
 
-Demand Forecasting Agent (/demand_forecasting)
+pricing_model.pkl – Trained model for pricing recommendation
+
+**📈 /demand_forecasting
 
 train.py – Model training script
 
@@ -79,14 +81,13 @@ predict.py – Demand prediction logic
 
 preprocess.py – Cleans and prepares data
 
-Inventory Agent (/inventory_agent)
+**📦 /inventory_agent
 
 inventory_decision.py – Decides whether to reorder stock
 
-Pricing Agent (/pricing_agent)
+**💰 /pricing_agent
 
 predict.py – Suggests dynamic pricing based on inputs
-
 
 ---
 
