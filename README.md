@@ -9,8 +9,8 @@
 
 ## 🚀 Live Demo
 
-🔗 [Click to Launch RetailQ Dashboard](https://<your-username>.streamlit.app)  
-(Replace with your actual Streamlit Cloud link)
+🔗  https://retailq-v3td2mj8lzu5davhvbqgch.streamlit.app/  
+ 
 
 ---
 
@@ -39,7 +39,7 @@ It’s built around a *multi-agent architecture* where each agent focuses on a s
 
 ## 🖥 Dashboard UI (Streamlit)
 
-<img src="https://github.com/yourusername/RetailQ/blob/main/assets/dashboard_demo.png" width="100%"/>
+<img src="https://github.com/project-dataloom/RetailQ/blob/main/RetailQ_Logo.jpg" width="100%"/>
 
 > Responsive layout with live data outputs for each agent  
 > Optional LLM-based explanations included using Mistral / Mock LLM
