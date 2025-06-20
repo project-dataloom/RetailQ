@@ -47,7 +47,6 @@ It’s built around a *multi-agent architecture* where each agent focuses on a s
 ---
 
 ## 📁 Folder Structure
-
  RetailQ/
 ├── dashboard.py              # Streamlit dashboard UI (Frontend)
 ├── main.py                   # Main entry to trigger all agents
