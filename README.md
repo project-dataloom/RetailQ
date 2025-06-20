@@ -47,32 +47,45 @@ It’s built around a *multi-agent architecture* where each agent focuses on a s
 ---
 
 ## 📁 Folder Structure
- RetailQ/
-├── dashboard.py              # Streamlit dashboard UI (Frontend)
-├── main.py                   # Main entry to trigger all agents
-├── multi_agent_loop.py       # Full multi-agent loop integration
-├── ollama_client.py          # Handles LLM reasoning via Ollama/Mistral
-├── requirements.txt          # Python dependencies
+   roject Root
 
-├── data/                     # Raw CSV datasets
-│   ├── demand_data.csv
-│   ├── inventory_sample.csv
-│   └── pricing_data.csv
+dashboard.py – Streamlit dashboard UI
 
-├── models/                   # Trained model .pkl files
-│   ├── demand_model.pkl
-│   └── pricing_model.pkl
+main.py – Orchestrates all agents
 
-├── demand_forecasting/       # Demand agent logic
-│   ├── train.py
-│   ├── predict.py
-│   └── preprocess.py
+multi_agent_loop.py – Runs the complete multi-agent flow
 
-├── inventory_agent/          # Inventory agent logic
-│   └── inventory_decision.py
+ollama_client.py – Handles LLM responses using Ollama
 
-└── pricing_agent/            # Pricing agent logic
-    └── predict.py
+requirements.txt – Lists project dependencies
+
+Data Folder (/data)
+
+demand_data.csv – Dataset for demand forecasting
+
+inventory_sample.csv – Sample stock and inventory data
+
+pricing_data.csv – Dataset for pricing agent
+
+Models Folder (/models)
+
+demand_model.pkl – Trained model for demand prediction
+
+Demand Forecasting Agent (/demand_forecasting)
+
+train.py – Model training script
+
+predict.py – Demand prediction logic
+
+preprocess.py – Cleans and prepares data
+
+Inventory Agent (/inventory_agent)
+
+inventory_decision.py – Decides whether to reorder stock
+
+Pricing Agent (/pricing_agent)
+
+predict.py – Suggests dynamic pricing based on inputs
 
 
 ---
