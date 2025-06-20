@@ -39,7 +39,7 @@ It’s built around a *multi-agent architecture* where each agent focuses on a s
 
 ## 🖥 Dashboard UI (Streamlit)
 
-<img src="https://github.com/project-dataloom/RetailQ/blob/main/RetailQ_Logo.jpg" width="100%"/>
+<img src="https://github.com/project-dataloom/RetailQ/blob/main/RetailQ_Logo.jpg" width="50%"/>
 
 > Responsive layout with live data outputs for each agent  
 > Optional LLM-based explanations included using Mistral / Mock LLM
