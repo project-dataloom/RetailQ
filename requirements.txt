@@ -3,4 +3,4 @@ pandas
 scikit-learn
 joblib
 matplotlib
-openai
+openai==0.28
