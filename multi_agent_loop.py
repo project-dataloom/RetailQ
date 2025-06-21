@@ -1,8 +1,8 @@
-
 import pandas as pd
 from demand_forecasting.predict import predict as predict_demand
 from inventory_agent.inventory_decision import inventory_decision
 from pricing_agent.predict import predict_price
+from openai_llm import ask_llm  # ✅ UPDATED LINE
 
 # --- Load datasets ---
 demand_df = pd.read_csv("data/demand_data.csv")
@@ -47,11 +47,8 @@ print(inventory_actions)
 print("\n💸 PRICING RECOMMENDATIONS:")
 print(pricing_df_out)
 
-#------------ Ollama Integration -------------
-
-from ollama_client import ask_ollama
-
-print("\n🧠 LLM Agent Reasoning (via Mistral):")
+#------------ OpenAI LLM Integration -------------
+print("\n🧠 LLM Agent Reasoning (via OpenAI):")
 for i, row in inventory_actions.iterrows():
     if row["Status"] == "REORDER":
         prompt = (
@@ -61,6 +58,5 @@ for i, row in inventory_actions.iterrows():
             f"and lead time {row['Lead Time (days)']} days.\n"
             f"Explain if it's a good idea to reorder and why."
         )
-        response = ask_ollama(prompt)
+        response = ask_llm(prompt)
         print(f"🧾 Product {row['Product ID']} → {response}\n")
- 
