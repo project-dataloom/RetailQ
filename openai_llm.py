@@ -1,7 +1,7 @@
 import openai
 import os
 
-openai.api_key = os.getenv("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")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def ask_llm(prompt: str):
     try:
