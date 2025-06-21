@@ -1,10 +1,24 @@
 import streamlit as st
 import pandas as pd
-import concurrent.futures
+import openai
 from demand_forecasting.predict import predict as predict_demand
 from inventory_agent.inventory_decision import inventory_decision
 from pricing_agent.predict import predict_price
-from ollama_client import ask_ollama
+import os
+
+# Load OpenAI API key from environment variable
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def ask_llm(prompt: str):
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        return f"LLM error: {str(e)}"
 
 # Load data
 demand_df = pd.read_csv("data/demand_data.csv")
@@ -43,16 +57,10 @@ predicted_demand = demand_df.groupby("Product ID")["Predicted Units Sold"].mean(
 st.dataframe(demand_df[["Product ID", "Predicted Units Sold"]].drop_duplicates(), use_container_width=True)
 
 if st.checkbox("🧠 Show LLM Reasoning (Demand)"):
-    def generate_demand_reasoning(pid, units):
-        prompt = f"Forecasted demand for Product {pid} is {units:.2f} units. What factors might explain this?"
-        return pid, ask_ollama(prompt)
-
-    with st.spinner("🔍 Reasoning in progress..."):
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(generate_demand_reasoning, pid, units) for pid, units in predicted_demand.items()]
-            for future in concurrent.futures.as_completed(futures):
-                pid, explanation = future.result()
-                st.markdown(f"*Product {pid}:* {explanation}")
+    for product_id, units in predicted_demand.items():
+        prompt = f"Forecasted demand for Product {product_id} is {units:.2f} units. What factors might explain this?"
+        explanation = ask_llm(prompt)
+        st.markdown(f"*Product {product_id}:* {explanation}")
 st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Inventory Agent ---
@@ -62,21 +70,16 @@ inventory_actions = inventory_decision(inventory_df, predicted_demand)
 st.dataframe(inventory_actions, use_container_width=True)
 
 if st.checkbox("📘 Show LLM Reasoning (Inventory)"):
-    def generate_inventory_reasoning(i, row):
-        prompt = (
-            f"Product {row['Product ID']} has current stock {inventory_df.loc[i, 'Current Stock']}, "
-            f"predicted demand {predicted_demand[row['Product ID']]:.2f}, "
-            f"reorder point {inventory_df.loc[i, 'Reorder Point']}, "
-            f"and lead time {row['Lead Time (days)']} days. Should we reorder? Explain."
-        )
-        return row['Product ID'], ask_ollama(prompt)
-
-    with st.spinner("🔍 Reasoning in progress..."):
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(generate_inventory_reasoning, i, row) for i, row in inventory_actions.iterrows() if row["Status"] == "REORDER"]
-            for future in concurrent.futures.as_completed(futures):
-                pid, explanation = future.result()
-                st.markdown(f"*Product {pid}:* {explanation}")
+    for i, row in inventory_actions.iterrows():
+        if row["Status"] == "REORDER":
+            prompt = (
+                f"Product {row['Product ID']} has current stock {inventory_df.loc[i, 'Current Stock']}, "
+                f"predicted demand {predicted_demand[row['Product ID']]:.2f}, "
+                f"reorder point {inventory_df.loc[i, 'Reorder Point']}, "
+                f"and lead time {row['Lead Time (days)']} days. Should we reorder? Explain."
+            )
+            response = ask_llm(prompt)
+            st.markdown(f"*Product {row['Product ID']}:* {response}")
 st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Pricing Agent ---
@@ -99,20 +102,14 @@ pricing_df_out = pd.DataFrame(pricing_results)
 st.dataframe(pricing_df_out, use_container_width=True)
 
 if st.checkbox("💬 Show LLM Reasoning (Pricing)"):
-    def generate_pricing_reasoning(row):
+    for i, row in pricing_df_out.iterrows():
         prompt = (
             f"Product {row['Product ID']} has a competitor price of ₹{row['Competitor Price']}, "
             f"our suggested price is ₹{row['Suggested Price']}, and stock remaining is {row['Stock Remaining']}. "
             f"Explain if this pricing is strategic and market-aligned."
         )
-        return row['Product ID'], ask_ollama(prompt)
-
-    with st.spinner("🔍 Reasoning in progress..."):
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(generate_pricing_reasoning, row) for _, row in pricing_df_out.iterrows()]
-            for future in concurrent.futures.as_completed(futures):
-                pid, explanation = future.result()
-                st.markdown(f"*Product {pid}:* {explanation}")
+        response = ask_llm(prompt)
+        st.markdown(f"*Product {row['Product ID']}:* {response}")
 st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Footer ---
